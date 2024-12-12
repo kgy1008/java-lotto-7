@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Lottos {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
@@ -27,5 +29,17 @@ public class Lottos {
         return lottos.stream()
                 .map(Lotto::sort)
                 .toList();
+    }
+
+    public double calculateProfit(final Map<Ranking, Integer> result) {
+        int initialMoney = lottos.size() * LOTTO_PRICE;
+        long winningMoney = calculateWinningPrice(result);
+        return ((double) winningMoney / initialMoney) * 100;
+    }
+
+    private long calculateWinningPrice(final Map<Ranking, Integer> result) {
+        return result.keySet().stream()
+                .mapToLong(ranking -> (long) ranking.getPrize() * result.get(ranking))
+                .sum();
     }
 }

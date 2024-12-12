@@ -23,10 +23,12 @@ public class LottoController {
     }
 
     public void run() {
-        Lottos lottos = buyLotto();
-        outputView.printLotto(lottos.getSortedLottos());
-        WinningLotto winningLotto = enterWinningLotto();
-        analyze(winningLotto, lottos);
+        rerunTemplate(() -> {
+            Lottos lottos = buyLotto();
+            outputView.printLotto(lottos.getSortedLottos());
+            WinningLotto winningLotto = enterWinningLotto();
+            analyze(winningLotto, lottos);
+        });
     }
 
     private Lottos buyLotto() {
@@ -47,6 +49,8 @@ public class LottoController {
     private void analyze(final WinningLotto winningLotto, final Lottos lottos) {
         Map<Ranking, Integer> result = lottos.analyze(winningLotto);
         outputView.printRank(result);
+        double profit = lottos.calculateProfit(result);
+        outputView.printProfit(profit);
     }
 
     private <T> T rerunTemplate(final Supplier<T> action) {
