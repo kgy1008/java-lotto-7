@@ -16,11 +16,13 @@ public class InputView {
     }
 
     public List<Integer> inputWinningLottoNumber() {
+        System.out.println("당첨 번호를 입력해 주세요.");
         String input = Console.readLine();
         return parseNumber(input);
     }
 
     public int inputBonusNumber() {
+        System.out.println("보너스 번호를 입력해 주세요.");
         String input = Console.readLine();
         return convertToInt(input);
     }
