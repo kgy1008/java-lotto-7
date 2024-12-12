@@ -19,4 +19,8 @@ public class WinningLotto {
         }
         return count;
     }
+
+    public boolean isContainBonusNumber(final Lotto lotto) {
+        return lotto.isContain(bonusNumber);
+    }
 }

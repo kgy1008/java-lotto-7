@@ -16,7 +16,8 @@ public class Lottos {
         Map<Ranking, Integer> result = new EnumMap<>(Ranking.class);
         lottos.forEach(lotto -> {
             int count = winningLotto.calculateMatchCount(lotto);
-            Ranking rank = Ranking.from(count);
+            boolean isShotBonus = winningLotto.isContainBonusNumber(lotto);
+            Ranking rank = Ranking.from(count, isShotBonus);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         });
         return result;
