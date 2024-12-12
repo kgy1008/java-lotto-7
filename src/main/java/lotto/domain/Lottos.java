@@ -15,13 +15,21 @@ public class Lottos {
     }
 
     public Map<Ranking, Integer> analyze(final WinningLotto winningLotto) {
-        Map<Ranking, Integer> result = new EnumMap<>(Ranking.class);
+        Map<Ranking, Integer> result = initResult();
         lottos.forEach(lotto -> {
             int count = winningLotto.calculateMatchCount(lotto);
             boolean isShotBonus = winningLotto.isContainBonusNumber(lotto);
             Ranking rank = Ranking.from(count, isShotBonus);
-            result.put(rank, result.getOrDefault(rank, 0) + 1);
+            result.put(rank, result.get(rank) + 1);
         });
+        return result;
+    }
+
+    private Map<Ranking, Integer> initResult() {
+        Map<Ranking, Integer> result = new EnumMap<>(Ranking.class);
+        for (Ranking rank : Ranking.values()) {
+            result.put(rank, 0);
+        }
         return result;
     }
 
