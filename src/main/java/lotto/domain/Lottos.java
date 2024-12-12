@@ -45,7 +45,9 @@ public class Lottos {
                 .sum();
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public List<List<Integer>> getSortedLottos() {
+        return lottos.stream()
+                .map(Lotto::sort)
+                .toList();
     }
 }

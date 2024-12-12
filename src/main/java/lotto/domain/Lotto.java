@@ -20,6 +20,10 @@ public class Lotto {
         return numbers.contains(number);
     }
 
+    List<Integer> sort() {
+        return numbers.stream().sorted().toList();
+    }
+
     private void validate(final List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicated(numbers);

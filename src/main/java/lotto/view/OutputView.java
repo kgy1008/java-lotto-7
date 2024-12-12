@@ -1,10 +1,7 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
 import lotto.domain.Ranking;
 
 public class OutputView {
@@ -13,15 +10,9 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printLotto(final List<Lotto> lottos) {
+    public void printLotto(final List<List<Integer>> lottos) {
         System.out.printf("%d개를 구매했습니다.%n", lottos.size());
-        lottos.forEach(lotto -> System.out.printf(getSortedNumber(lotto) + "%n"));
-    }
-
-    private List<Integer> getSortedNumber(final Lotto lotto) {
-        List<Integer> numbers = new ArrayList<>(lotto.getNumbers());
-        Collections.sort(numbers);
-        return numbers;
+        lottos.forEach(lotto -> System.out.printf(lotto + "%n"));
     }
 
     public void printRank(final Map<Ranking, Integer> result) {
