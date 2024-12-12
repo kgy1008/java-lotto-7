@@ -9,4 +9,10 @@ public class Lottos {
     public Lottos(final List<Lotto> lottos) {
         this.lottos = lottos;
     }
+
+    public List<Lotto> getSortedLottos() {
+        return lottos.stream()
+                .map(Lotto::sort)
+                .toList();
+    }
 }
