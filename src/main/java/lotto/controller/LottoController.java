@@ -1,9 +1,11 @@
 package lotto.controller;
 
+import java.util.Map;
 import java.util.function.Supplier;
 import lotto.domain.Lotto;
 import lotto.domain.LottoSeller;
 import lotto.domain.Lottos;
+import lotto.domain.Ranking;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -43,7 +45,8 @@ public class LottoController {
     }
 
     private void analyze(final WinningLotto winningLotto, final Lottos lottos) {
-        lottos.analyze(winningLotto);
+        Map<Ranking, Integer> result = lottos.analyze(winningLotto);
+        outputView.printRank(result);
     }
 
     private <T> T rerunTemplate(final Supplier<T> action) {
