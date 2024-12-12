@@ -25,7 +25,7 @@ public class LottoController {
 
     public void run() {
         Lottos lottos = buyLotto();
-        outputView.printLotto(lottos.getSortedLottos());
+        outputView.printLotto(lottos.getLottos());
         WinningLotto winningLotto = enterWinningLotto();
         analyze(winningLotto, lottos);
     }

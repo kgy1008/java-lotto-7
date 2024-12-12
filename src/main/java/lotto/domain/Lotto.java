@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 import lotto.common.ErrorMessage;
 
@@ -23,11 +22,6 @@ public class Lotto {
         if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT.getMessage());
         }
-    }
-
-    public Lotto sort() {
-        Collections.sort(numbers);
-        return this;
     }
 
     public List<Integer> getNumbers() {

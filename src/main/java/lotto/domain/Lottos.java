@@ -33,12 +33,6 @@ public class Lottos {
         return result;
     }
 
-    public List<Lotto> getSortedLottos() {
-        return lottos.stream()
-                .map(Lotto::sort)
-                .toList();
-    }
-
     public double calculateProfit(final Map<Ranking, Integer> result) {
         int initialMoney = lottos.size() * LOTTO_PRICE;
         long winningMoney = calculateWinningPrice(result);
@@ -49,5 +43,9 @@ public class Lottos {
         return result.keySet().stream()
                 .mapToLong(ranking -> (long) ranking.getPrize() * result.get(ranking))
                 .sum();
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
