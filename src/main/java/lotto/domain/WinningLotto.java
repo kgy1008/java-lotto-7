@@ -17,6 +17,9 @@ public class WinningLotto {
                 count++;
             }
         }
+        if (isContainBonusNumber(target)) {
+            count++;
+        }
         return count;
     }
 
