@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import lotto.domain.Lotto;
@@ -23,12 +24,10 @@ public class LottoController {
     }
 
     public void run() {
-        rerunTemplate(() -> {
-            Lottos lottos = buyLotto();
-            outputView.printLotto(lottos.getSortedLottos());
-            WinningLotto winningLotto = enterWinningLotto();
-            analyze(winningLotto, lottos);
-        });
+        Lottos lottos = buyLotto();
+        outputView.printLotto(lottos.getSortedLottos());
+        WinningLotto winningLotto = enterWinningLotto();
+        analyze(winningLotto, lottos);
     }
 
     private Lottos buyLotto() {
@@ -40,7 +39,8 @@ public class LottoController {
 
     private WinningLotto enterWinningLotto() {
         return rerunTemplate(() -> {
-            Lotto lotto = new Lotto(inputView.inputWinningLottoNumber());
+            List<Integer> lottoNumber = inputView.inputWinningLottoNumber();
+            Lotto lotto = new Lotto(lottoNumber);
             int bonusNumber = inputView.inputBonusNumber();
             return new WinningLotto(lotto, bonusNumber);
         });
