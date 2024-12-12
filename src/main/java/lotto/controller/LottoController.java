@@ -1,8 +1,10 @@
 package lotto.controller;
 
 import java.util.function.Supplier;
+import lotto.domain.Lotto;
 import lotto.domain.LottoSeller;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,6 +23,8 @@ public class LottoController {
     public void run() {
         Lottos lottos = buyLotto();
         outputView.printLotto(lottos.getSortedLottos());
+        WinningLotto winningLotto = enterWinningLotto();
+        analyze(winningLotto, lottos);
     }
 
     private Lottos buyLotto() {
@@ -28,6 +32,18 @@ public class LottoController {
             int money = inputView.inputMoney();
             return lottoSeller.sellTo(money);
         });
+    }
+
+    private WinningLotto enterWinningLotto() {
+        return rerunTemplate(() -> {
+            Lotto lotto = new Lotto(inputView.inputWinningLottoNumber());
+            int bonusNumber = inputView.inputBonusNumber();
+            return new WinningLotto(lotto, bonusNumber);
+        });
+    }
+
+    private void analyze(final WinningLotto winningLotto, final Lottos lottos) {
+        lottos.analyze(winningLotto);
     }
 
     private <T> T rerunTemplate(final Supplier<T> action) {
